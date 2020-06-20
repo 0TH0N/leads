@@ -1,0 +1,55 @@
+version: "3.5"
+
+networks:
+    leads-network:
+        external: true
+
+volumes:
+    data_mysql:
+
+services:
+    leads_mysql:
+        env_file:
+            - .env
+        image: percona:5.5-stretch
+        container_name: leads_mysql
+        volumes:
+            - "./docker/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf"
+            - data_mysql:/var/lib/mysql
+        ports:
+            - 3306:3306
+        networks:
+            - leads-network
+
+    leads_nginx:
+        env_file:
+            - .env
+        image: nginx
+        container_name: leads_nginx
+        volumes:
+            - "./:/var/www/leads:rw"
+            - "./docker/nginx/leads.conf:/etc/nginx/conf.d/default.conf"
+            - "./docker/nginx/keys:/etc/nginx/keys:rw"
+        ports:
+            - 80:80
+            - 443:443
+        networks:
+            - leads-network
+
+    leads_app:
+        env_file:
+            - .env
+        build:
+            context: .
+            dockerfile: ./docker/app/Dockerfile
+            args:
+                - APP_ENV
+                - TIMEZONE
+        container_name: leads_app
+        volumes:
+            - "./:/var/www/leads:rw"
+        networks:
+            - leads-network
+        environment:
+            XDEBUG_CONFIG: "idekey=PHPSTORM remote_host=172.18.0.1 remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=leads.loc"
