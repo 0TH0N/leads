@@ -21,6 +21,21 @@ services:
         networks:
             - leads-network
 
+    leads_phpmyadmin:
+        depends_on:
+            - leads_mysql
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - '10088:80'
+        links:
+            - leads_mysql
+        environment:
+            PMA_USER: ${MYSQL_ROOT_USER}
+            PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            PMA_HOST: leads_mysql
+        networks:
+            - leads-network
+
     leads_nginx:
         env_file:
             - .env
@@ -28,7 +43,7 @@ services:
         container_name: leads_nginx
         volumes:
             - "./:/var/www/leads:rw"
-            - "./docker/nginx/leads.conf:/etc/nginx/conf.d/default.conf"
+            - "./docker/nginx/leads.dev.conf:/etc/nginx/conf.d/default.conf"
             - "./docker/nginx/keys:/etc/nginx/keys:rw"
         ports:
             - 80:80
@@ -50,3 +65,6 @@ services:
             - "./:/var/www/leads:rw"
         networks:
             - leads-network
+        environment:
+            XDEBUG_CONFIG: "idekey=PHPSTORM remote_host=172.18.0.1 remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=leads.loc"

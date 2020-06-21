@@ -13,3 +13,7 @@ block_user:
 unblock_user:
     path: /users/unblock
     controller: App\Controller\UserController::unblockUser
+
+change_user_password:
+    path: /users/change-password
+    controller: App\Controller\UserController::changeUserPassword

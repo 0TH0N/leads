@@ -132,4 +132,14 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function isAdmin()
+    {
+        return count(array_intersect(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'], $this->getRoles())) > 0;
+    }
+
+    public function isSuperAdmin()
+    {
+        return count(array_intersect(['ROLE_SUPER_ADMIN'], $this->getRoles())) > 0;
+    }
 }

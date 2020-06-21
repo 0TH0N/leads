@@ -1,9 +1,9 @@
-docker-compose.override.yml
-.env
+#docker-compose.override.yml
+#.env
 /.idea/
-/.env.local
-/.env.local.php
-/.env.*.local
+#/.env.local
+#/.env.local.php
+#/.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/

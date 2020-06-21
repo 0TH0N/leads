@@ -53,6 +53,16 @@ Content-Type: application/json
   "newPassword": "sdffdg#s@@2D"
 }
 
+### Попытка создания пользователя обычным админом без указания имени
+POST http://localhost:80/users/add
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "newPassword": "sdffdg#s@@2D"
+}
+
 ### Блокирование пользователя
 POST http://localhost:80/users/block
 Content-Type: application/json
@@ -71,4 +81,38 @@ Content-Type: application/json
   "username": "dirmir3",
   "password": "sdffdg#s@@2D",
   "unblockedUsername": "dirmir"
+}
+
+### Смена пароля пользователя админом
+POST http://localhost:80/users/change-password
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "neededUsername": "dirmir",
+  "newPassword": "32fasdfSDFfsd#"
+}
+
+
+### Неудачная попытка смены пароля пользователя другим юзером
+POST http://localhost:80/users/change-password
+Content-Type: application/json
+
+{
+  "username": "dirmir2",
+  "password": "sdffdg#s@@2D",
+  "neededUsername": "dirmir",
+  "newPassword": "32fasdfSDFfsd#"
+}
+
+### Смена пароля пользователя самим юзером
+POST http://localhost:80/users/change-password
+Content-Type: application/json
+
+{
+  "username": "dirmir",
+  "password": "32fasdfSDFfsd#",
+  "neededUsername": "dirmir",
+  "newPassword": "sdffdg#s@@2D"
 }
