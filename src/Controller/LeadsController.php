@@ -120,6 +120,7 @@ class LeadsController
             $this->isBlockedUser($user);
             $size = isset($jsonData['pageSize']) ? (int) $jsonData['pageSize'] : 20;
             $page = isset($jsonData['pageNumber']) ? (int) $jsonData['pageNumber'] : 0;
+            $page = $page * $size;
             $users = isset($jsonData['filterUsers']) ? (array) $jsonData['filterUsers'] : [];
             $statuses = isset($jsonData['filterStatus']) ? (array) $jsonData['filterStatus'] : [];
 

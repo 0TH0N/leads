@@ -156,6 +156,21 @@ Content-Type: application/json
   }
 }
 
+### Запрос своих лидов обычным юзером.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "dirmir4",
+  "password": "sdffdg#s@@2D",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterStatus": {
+    "0": "new",
+    "1": "active"
+  }
+}
+
 ### Запрос лидов админом.
 GET http://localhost:80/leads/get
 Content-Type: application/json
@@ -172,5 +187,90 @@ Content-Type: application/json
   "filterStatus": {
     "0": "new",
     "1": "active"
+  }
+}
+
+### Запрос лидов админом.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterUsers": {
+    "0": "dirmir3",
+    "1": "dirmir4"
+  },
+  "filterStatus": {
+    "0": "new",
+    "1": "active"
+  }
+}
+
+
+
+
+
+
+### Загрузите фикстуры путем запуска команды "make fixture"
+### Запрос лидов обычным юзером без фильтра.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "User_1",
+  "password": "123456",
+  "pageSize": "5",
+  "pageNumber": "2"
+}
+
+### Запрос лидов обычным юзером с фильтром.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "User_2",
+  "password": "123456",
+  "pageSize": "7",
+  "pageNumber": "3",
+  "filterStatus": {
+    "0": "new",
+    "1": "active"
+  }
+}
+
+### Запрос лидов админом по 2 юзерам.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "User_admin",
+  "password": "123456",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterUsers": {
+    "0": "User_3",
+    "1": "User_4"
+  }
+}
+
+### Запрос лидов админом по 2 юзерам и 2 статусам.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "User_admin",
+  "password": "123456",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterUsers": {
+    "0": "User_3",
+    "1": "User_4"
+  },
+  "filterStatus": {
+    "0": "new",
+    "1": "finished"
   }
 }
