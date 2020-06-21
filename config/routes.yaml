@@ -1,3 +1,15 @@
-index:
-    path: /
-    controller: App\Controller\DefaultController::index
+add_root_user:
+    path: /users/add-root-user
+    controller: App\Controller\UserController::addFirstRootUser
+
+add_user:
+    path: /users/add
+    controller: App\Controller\UserController::addUser
+
+block_user:
+    path: /users/block
+    controller: App\Controller\UserController::blockUser
+
+unblock_user:
+    path: /users/unblock
+    controller: App\Controller\UserController::unblockUser

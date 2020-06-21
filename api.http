@@ -1,0 +1,74 @@
+### Создание первого пользователя админа
+POST http://localhost:80/users/add-root-user
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "Super-puper-777"
+}
+
+### Создание пользователя
+POST http://localhost:80/users/add
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "Super-puper-777",
+  "newUsername": "dirmir",
+  "newPassword": "sdffdg#s@@2D"
+}
+
+### Создание пользователя админа
+POST http://localhost:80/users/add
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "Super-puper-777",
+  "newUsername": "dirmir3",
+  "newPassword": "sdffdg#s@@2D",
+  "newAdmin": "true"
+}
+
+### Провальное создание пользователя из-за недостатка прав
+POST http://localhost:80/users/add
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "newUsername": "dirmir4",
+  "newPassword": "sdffdg#s@@2D",
+  "newAdmin": "true"
+}
+
+### создание пользователя обычным админом
+POST http://localhost:80/users/add
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "newUsername": "dirmir4",
+  "newPassword": "sdffdg#s@@2D"
+}
+
+### Блокирование пользователя
+POST http://localhost:80/users/block
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "Super-puper-777",
+  "blockedUsername": "dirmir"
+}
+
+### Разблокирование пользователя
+POST http://localhost:80/users/unblock
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "unblockedUsername": "dirmir"
+}

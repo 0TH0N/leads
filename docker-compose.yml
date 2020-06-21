@@ -11,11 +11,11 @@ services:
     leads_mysql:
         env_file:
             - .env
-        image: percona:5.5-stretch
+        image: mysql
         container_name: leads_mysql
         volumes:
             - "./docker/mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf"
-            - data_mysql:/var/lib/mysql
+            - data_mysql:/var/lib2/mysql
         ports:
             - 3306:3306
         networks:
