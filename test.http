@@ -1,4 +1,4 @@
-### Создание первого пользователя админа
+### Создание первого пользователя супер админа
 POST http://localhost:80/users/add-root-user
 Content-Type: application/json
 
@@ -7,7 +7,7 @@ Content-Type: application/json
   "password": "Super-puper-777"
 }
 
-### Создание пользователя
+### Создание простого пользователя суперадмином
 POST http://localhost:80/users/add
 Content-Type: application/json
 
@@ -63,7 +63,7 @@ Content-Type: application/json
   "newPassword": "sdffdg#s@@2D"
 }
 
-### Блокирование пользователя
+### Блокирование пользователя суперадмином
 POST http://localhost:80/users/block
 Content-Type: application/json
 
@@ -73,7 +73,7 @@ Content-Type: application/json
   "blockedUsername": "dirmir"
 }
 
-### Разблокирование пользователя
+### Разблокирование пользователя обычным админом
 POST http://localhost:80/users/unblock
 Content-Type: application/json
 
@@ -141,7 +141,7 @@ Content-Type: application/json
   "status": "new"
 }
 
-### Запрос своих лидов обычным юзером.
+### Запрос своих лидов обычным юзером с фильтром состояния.
 GET http://localhost:80/leads/get
 Content-Type: application/json
 
@@ -156,7 +156,7 @@ Content-Type: application/json
   }
 }
 
-### Запрос своих лидов обычным юзером.
+### Запрос своих лидов обычным юзером с фильтром состояния (у него их ноль).
 GET http://localhost:80/leads/get
 Content-Type: application/json
 
@@ -171,7 +171,7 @@ Content-Type: application/json
   }
 }
 
-### Запрос лидов админом.
+### Запрос лидов админом с фильтрами по юзерам и состояниям.
 GET http://localhost:80/leads/get
 Content-Type: application/json
 
@@ -190,7 +190,7 @@ Content-Type: application/json
   }
 }
 
-### Запрос лидов админом.
+### Запрос лидов админом с фильтрами по юзерам и состояниям.
 GET http://localhost:80/leads/get
 Content-Type: application/json
 
@@ -214,7 +214,7 @@ Content-Type: application/json
 
 
 
-### Загрузите фикстуры путем запуска команды "make fixture"
+### Загрузите фикстуры путем запуска команды "make fixtures"
 ### Запрос лидов обычным юзером без фильтра.
 GET http://localhost:80/leads/get
 Content-Type: application/json
@@ -226,7 +226,7 @@ Content-Type: application/json
   "pageNumber": "2"
 }
 
-### Запрос лидов обычным юзером с фильтром.
+### Запрос лидов обычным юзером с фильтром статусов.
 GET http://localhost:80/leads/get
 Content-Type: application/json
 

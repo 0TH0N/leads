@@ -45,7 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->select('u')
             ->orderBy('u.id', 'ASC')
             ->getQuery()
-            ->getArrayResult()[0];
+            ->getOneOrNullResult();
     }
 
     public function findByUsernames(array $usernames)
