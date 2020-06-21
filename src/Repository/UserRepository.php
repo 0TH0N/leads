@@ -41,11 +41,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function getRootUser()
     {
-        return $this->createQueryBuilder('u')
+        $result = $this->createQueryBuilder('u')
             ->select('u')
             ->orderBy('u.id', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getArrayResult();
+
+        return count($result) > 0 ? $result[0] : [];
     }
 
     public function findByUsernames(array $usernames)
