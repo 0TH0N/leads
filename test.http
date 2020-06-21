@@ -18,7 +18,7 @@ Content-Type: application/json
   "newPassword": "sdffdg#s@@2D"
 }
 
-### Создание пользователя админа
+### Создание пользователя админа суперадмином
 POST http://localhost:80/users/add
 Content-Type: application/json
 
@@ -30,7 +30,7 @@ Content-Type: application/json
   "newAdmin": "true"
 }
 
-### Провальное создание пользователя из-за недостатка прав
+### Провальное создание пользователя админа другим админом из-за недостатка прав
 POST http://localhost:80/users/add
 Content-Type: application/json
 
@@ -100,7 +100,7 @@ POST http://localhost:80/users/change-password
 Content-Type: application/json
 
 {
-  "username": "dirmir2",
+  "username": "dirmir4",
   "password": "sdffdg#s@@2D",
   "neededUsername": "dirmir",
   "newPassword": "32fasdfSDFfsd#"
@@ -115,4 +115,62 @@ Content-Type: application/json
   "password": "32fasdfSDFfsd#",
   "neededUsername": "dirmir",
   "newPassword": "sdffdg#s@@2D"
+}
+
+### Пост нового лида.
+POST http://localhost:80/leads/new
+Content-Type: application/json
+
+{
+  "username": "dirmir",
+  "password": "sdffdg#s@@2D",
+  "name": "question",
+  "sourceId": "yandex",
+  "status": "new"
+}
+
+### Пост нового лида несуществующим юзером.
+POST http://localhost:80/leads/new
+Content-Type: application/json
+
+{
+  "username": "dirmir55",
+  "password": "sdffdg#s@@2D",
+  "name": "question",
+  "sourceId": "yandex",
+  "status": "new"
+}
+
+### Запрос своих лидов обычным юзером.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "dirmir",
+  "password": "sdffdg#s@@2D",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterStatus": {
+    "0": "new",
+    "1": "active"
+  }
+}
+
+### Запрос лидов админом.
+GET http://localhost:80/leads/get
+Content-Type: application/json
+
+{
+  "username": "dirmir3",
+  "password": "sdffdg#s@@2D",
+  "pageSize": "5",
+  "pageNumber": "0",
+  "filterUsers": {
+    "0": "dirmir",
+    "1": "dirmir4"
+  },
+  "filterStatus": {
+    "0": "new",
+    "1": "active"
+  }
 }

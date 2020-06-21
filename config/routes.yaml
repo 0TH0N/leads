@@ -17,3 +17,11 @@ unblock_user:
 change_user_password:
     path: /users/change-password
     controller: App\Controller\UserController::changeUserPassword
+
+leads_post:
+    path: /leads/new
+    controller: App\Controller\LeadsController::new
+
+leads_get:
+    path: /leads/get
+    controller: App\Controller\LeadsController::get

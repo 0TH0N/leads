@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,6 +41,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $isActive = true;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Lead::class, mappedBy="created_by", orphanRemoval=true)
+     */
+    private $leads;
+
+    public function __construct()
+    {
+        $this->leads = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -141,5 +153,36 @@ class User implements UserInterface
     public function isSuperAdmin()
     {
         return count(array_intersect(['ROLE_SUPER_ADMIN'], $this->getRoles())) > 0;
+    }
+
+    /**
+     * @return Collection|Lead[]
+     */
+    public function getLeads(): Collection
+    {
+        return $this->leads;
+    }
+
+    public function addLead(Lead $lead): self
+    {
+        if (!$this->leads->contains($lead)) {
+            $this->leads[] = $lead;
+            $lead->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLead(Lead $lead): self
+    {
+        if ($this->leads->contains($lead)) {
+            $this->leads->removeElement($lead);
+            // set the owning side to null (unless already changed)
+            if ($lead->getCreatedBy() === $this) {
+                $lead->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 }
