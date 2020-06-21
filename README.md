@@ -11,7 +11,7 @@ make start
 ```bash
 make enter
 ```
-3 . Cоздайте базу:
+3 . Cоздайте базу (также не забудьте сделать `composer install` в первый раз):
 ```bash
 make install
 ```
